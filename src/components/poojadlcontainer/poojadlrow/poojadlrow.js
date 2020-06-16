@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import axios from 'axios'
 import { TableCell, Button, TableRow, Chip,
 Collapse, Box, TextField, RadioGroup, FormLabel, FormControl, FormControlLabel, Radio, Grid, Typography, makeStyles, Backdrop, CircularProgress } from '@material-ui/core'
@@ -22,10 +22,6 @@ export default function PoojaDlRow(props) {
 
     const categoryChips = props.categories.map((category, index) => <Chip label={category} key={index}/>)
 
-    useEffect(() => {
-        console.log(props)
-    }, [])
-
     const createSubscription = () => {
         setIsSubmitRegistration(true)
         setTiredToSubmit(true)
@@ -40,6 +36,7 @@ export default function PoojaDlRow(props) {
                 if(res.data){
                     setIsSubmitRegistration(false)
                     setIsSuccess(true)
+                    setOpen(false)
                 }
             })
             .catch(err=> {
@@ -60,9 +57,12 @@ export default function PoojaDlRow(props) {
                     {categoryChips}
                 </TableCell>
                 <TableCell>
+                    {triedToSubmit && isSuccess?
+                        <Typography variant="body2">Subscribed!</Typography>
+                    :
                     <Button variant="text" onClick={() => setOpen(!open)}>
-                        Sign up
-                    </Button>
+                        {open?"Close":"Sign up!"}
+                    </Button>}
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -100,8 +100,7 @@ export default function PoojaDlRow(props) {
                                 </Grid>
                             </Grid>
                             {triedToSubmit? 
-                                isSuccess?(<div align="center">Success! You are now subscribed to updates from {props.dlName}</div>):
-                                    !isSubmitRegistration?(<div align="center">There was an error! Try again later.</div>):<div/>:<div/>}
+                                !isSuccess && !isSubmitRegistration?(<div align="center">There was an error! Try again later.</div>):<div/>:<div/>}
                         </Box>
                     </Collapse>
                 </TableCell>

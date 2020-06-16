@@ -3,6 +3,8 @@ import Logobar from '../logobar/logobar'
 import Navbar from '../navbar/navbar'
 import { makeStyles } from '@material-ui/core'
 import PoojaDlContainer from '../poojadlcontainer/poojadlcontainer'
+import { Switch, Route } from 'react-router-dom'
+import Provider from '../provider/provider'
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +21,10 @@ export default function App() {
             <br/>
             <Navbar/>
             <br/>
-            <PoojaDlContainer/>
+            <Switch>
+                <Route exact path="/" component={PoojaDlContainer}/>
+                <Route exact path="/become-a-provider" component={Provider}/>
+            </Switch>
         </div>
     )
 }
