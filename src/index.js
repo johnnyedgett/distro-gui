@@ -8,13 +8,11 @@ import { Router } from 'react-router-dom'
 import history from './util/history'
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <Router history={history}>
         <App/>
       </Router>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

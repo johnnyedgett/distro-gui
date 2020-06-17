@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import basic from './basic-reducer'
+import snackbar from './snackbar-reducer'
 
 export default combineReducers({
-    basic
+    snackbar
 })

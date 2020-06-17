@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import axios from 'axios'
 import { TableCell, Button, TableRow, Chip,
 Collapse, Box, TextField, RadioGroup, FormLabel, FormControl, FormControlLabel, Radio, Grid, Typography, makeStyles, Backdrop, CircularProgress } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { toggleSnackbarActive } from '../../../redux/actions/snackbar-actions'
 
 const useStyles = makeStyles((theme) => ({
     backdrop: {
@@ -10,7 +12,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function PoojaDlRow(props) {
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleSnackbarActive: (message) => dispatch(toggleSnackbarActive(message))
+    }
+}
+
+function PoojaDlRow(props) {
     const classes = useStyles()
     const [open, setOpen] = useState(false)
     const [phoneNumber, setPhoneNumber] = useState("")
@@ -37,6 +45,7 @@ export default function PoojaDlRow(props) {
                     setIsSubmitRegistration(false)
                     setIsSuccess(true)
                     setOpen(false)
+                    props.toggleSnackbarActive("Successfully subscribed to " + props.dlName + "!")
                 }
             })
             .catch(err=> {
@@ -108,3 +117,5 @@ export default function PoojaDlRow(props) {
         </>
     )
 }
+
+export default connect(null, mapDispatchToProps)(PoojaDlRow)
