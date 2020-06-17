@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+const mapStateToProps = state => {
+    return {
+        snackbar: state.snackbar
+    }
+}
 const mapDispatchToProps = dispatch => {
     return {
         toggleSnackbarActive: (message) => dispatch(toggleSnackbarActive(message))
@@ -118,4 +123,4 @@ function PoojaDlRow(props) {
     )
 }
 
-export default connect(null, mapDispatchToProps)(PoojaDlRow)
+export default connect(mapStateToProps, mapDispatchToProps)(PoojaDlRow)

@@ -1,6 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { Button, Toolbar, makeStyles } from '@material-ui/core'
-import history from '../../util/history'
 
 const useStyles = makeStyles({
     toolbar: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     }
 })
 
-export default function Navbar() {
+function Navbar(props) {
     const classes = useStyles()
     return (
         <div>
@@ -17,8 +17,10 @@ export default function Navbar() {
                 className={classes.toolbar}>
                     <Button variant="text">About</Button>
                     <div style={{ flex: 1 }}/>
-                    <Button variant="text" onClick={() => history.push("/become-a-provider")}>Become a provider!</Button>
+                    <Button variant="text" onClick={() => props.history.push("/become-a-provider")}>Become a provider!</Button>
             </Toolbar>
         </div>
     )
 }
+
+export default withRouter(Navbar)

@@ -25,7 +25,7 @@ function App(props) {
             <br/>
             <Switch>
                 <Route exact path="/" component={PoojaDlContainer}/>
-                <Route path="/become-a-provider" component={Provider}/>
+                <Route exact path="/become-a-provider" component={Provider}/>
                 <Route component={() => {
                     return <div align="center">
                         <Typography variant="h3">404</Typography>
