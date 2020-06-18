@@ -10,13 +10,15 @@ export default function PoojaDlContainer(props){
     const [poojaJsx, setPoojaJsx] = useState(<TableRow/>)
 
     useEffect(() => {
-        axios.get("/api/poojadl/all")
+        axios.get("/api/distributionlist/all")
             .then(res => {
+                console.log(res.data)
                 setPoojaRows(res.data)
             })
     }, [])
 
     useEffect(() => {
+        console.log("recveived " + poojaRows)
         setPoojaJsx(poojaRows.map((row, index) => <PoojaDlRow key={index} {...row}/> ))
     }, [poojaRows])
     

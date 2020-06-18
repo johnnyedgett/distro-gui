@@ -65,7 +65,9 @@ function PoojaDlRow(props) {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <TableRow key={props.index}>
-                <TableCell><Typography variant="body1">{props.dlName}</Typography></TableCell>
+                <TableCell>
+                    <Typography variant="body1">{props.listName}</Typography>
+                </TableCell>
                 <TableCell>
                     {/* <Chip label="Basic"/> */}
                     {categoryChips}

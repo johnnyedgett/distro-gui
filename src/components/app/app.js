@@ -5,8 +5,10 @@ import { Typography, makeStyles } from '@material-ui/core'
 import PoojaDlContainer from '../poojadlcontainer/poojadlcontainer'
 import CustomSnackbar from '../customsnackbar/customsnackbar'
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
-import Provider from '../provider/provider'
-
+// import Provider from '../provider/provider'
+import Login from '../login/login'
+import Register from '../register/register'
+import About from '../about/about'
 const useStyles = makeStyles({
     root: {
         marginLeft: '20%',
@@ -25,7 +27,9 @@ function App(props) {
             <br/>
             <Switch>
                 <Route exact path="/" component={PoojaDlContainer}/>
-                <Route exact path="/become-a-provider" component={Provider}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+                <Route exact path="/about" component={About}/>
                 <Route component={() => {
                     return <div align="center">
                         <Typography variant="h3">404</Typography>

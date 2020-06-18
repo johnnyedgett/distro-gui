@@ -15,9 +15,10 @@ function Navbar(props) {
         <div>
             <Toolbar
                 className={classes.toolbar}>
-                    <Button variant="text">About</Button>
+                    <Button variant="text" onClick={() => props.history.push("/about")}>About</Button>
                     <div style={{ flex: 1 }}/>
-                    <Button variant="text" onClick={() => props.history.push("/become-a-provider")}>Become a provider!</Button>
+                    <Button variant="text" onClick={() => props.history.push("/register")}>Register</Button>
+                    <Button variant="text" onClick={() => props.history.push("/login")}>Login</Button>
             </Toolbar>
         </div>
     )
