@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import PoojaDlRow from './poojadlrow/poojadlrow'
+import PoojaDlRow from './dlrow/dlrow'
 import { Table, TableHead, TableBody, TableCell, TableRow, TableContainer, Paper} from '@material-ui/core'
 
 
 
-export default function PoojaDlContainer(props){ 
+export default function DlContainer(props){ 
     const [poojaRows, setPoojaRows] = useState([])
     const [poojaJsx, setPoojaJsx] = useState(<TableRow/>)
 

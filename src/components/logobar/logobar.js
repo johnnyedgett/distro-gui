@@ -6,9 +6,9 @@ export default function Logobar() {
     return (
         <div align="center">
             <Typography variant="h2">
-                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Pooja DL</Link>
+                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Distro</Link>
             </Typography>
-            <Typography variant="body1">For all of your Pooja needs</Typography>
+            <Typography variant="body1">Stay connected</Typography>
         </div>
     )
 }

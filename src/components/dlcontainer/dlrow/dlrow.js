@@ -1,30 +1,26 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { TableCell, Button, TableRow, Chip,
-Collapse, Box, TextField, RadioGroup, FormLabel, FormControl, FormControlLabel, Radio, Grid, Typography, makeStyles, Backdrop, CircularProgress } from '@material-ui/core'
+Collapse, Box, TextField, RadioGroup, FormLabel, FormControl, FormControlLabel, Radio, Grid, Typography } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { toggleSnackbarActive } from '../../../redux/actions/snackbar-actions'
-
-const useStyles = makeStyles((theme) => ({
-    backdrop: {
-      zIndex: theme.zIndex.drawer + 1,
-      color: '#fff',
-    },
-  }));
+import { toggleLoading } from '../../../redux/actions/util-actions.js'
 
 const mapStateToProps = state => {
     return {
-        snackbar: state.snackbar
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        toggleSnackbarActive: (message) => dispatch(toggleSnackbarActive(message))
+        snackbar: state.snackbar,
+        util: state.util
     }
 }
 
-function PoojaDlRow(props) {
-    const classes = useStyles()
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleSnackbarActive: (message) => dispatch(toggleSnackbarActive(message)),
+        toggleLoading: (loading) => dispatch(toggleLoading(loading))
+    }
+}
+
+function DlRow(props) {
     const [open, setOpen] = useState(false)
     const [phoneNumber, setPhoneNumber] = useState("")
     const [contactType, setContactType] = useState("SMS")
@@ -47,23 +43,18 @@ function PoojaDlRow(props) {
         axios.post("/api/subscription/create?poojadl=" + props.id, data)
             .then(res => {
                 if(res.data){
-                    setIsSubmitRegistration(false)
                     setIsSuccess(true)
                     setOpen(false)
                     props.toggleSnackbarActive("Successfully subscribed to " + props.dlName + "!")
                 }
             })
             .catch(err=> {
-                setIsSubmitRegistration(false)
                 setIsSuccess(false)
             })
     }
 
     return (
         <>
-            <Backdrop className={classes.backdrop} open={isSubmitRegistration}>
-                <CircularProgress color="inherit" />
-            </Backdrop>
             <TableRow key={props.index}>
                 <TableCell>
                     <Typography variant="body1">{props.listName}</Typography>
@@ -125,4 +116,4 @@ function PoojaDlRow(props) {
     )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoojaDlRow)
+export default connect(mapStateToProps, mapDispatchToProps)(DlRow)
