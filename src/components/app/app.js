@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const mapStateToProps = state => {
     return {
-        util: state.util
+        util: state.util,
+        user: state.user
     }
 }
 

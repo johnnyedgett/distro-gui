@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Grid, Typography, FormControl, InputLabel, Input, FormHelperText, makeStyles } from '@material-ui/core'
 import Axios from 'axios'
 import { toggleLoading } from '../../redux/actions/util-actions'
+import { setUser } from '../../redux/actions/user-actions'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash.isempty'
+import { withRouter } from 'react-router-dom'
 
 const useStyles = makeStyles({
     input: {
@@ -15,12 +17,25 @@ const useStyles = makeStyles({
     }
 })
 
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
-        toggleLoading: (status) => dispatch(toggleLoading(status))
+        toggleLoading: (status) => dispatch(toggleLoading(status)),
+        setUser: (user) => dispatch(setUser(user))
     }
 }
 function Register(props){
+    useEffect(() => {
+        // Check if the user is already logged in. If they are redirect to homepage
+        if(props.user.authenticated)
+            props.history.push("/")
+    }, [props.history, props.user])
+
     const classes = useStyles()
 
     const [email, setEmail] = useState("")
@@ -28,6 +43,7 @@ function Register(props){
 
     const [error, setError] = useState("")
 
+    /* TODO Migrate to thunks */
     const handleSubmit = () => {
         props.toggleLoading(true)
         Axios.post("/api/auth/register", {
@@ -36,7 +52,8 @@ function Register(props){
         })
             .then(res => {
                 props.toggleLoading(false)
-                console.log(res.data)
+                props.setUser(res.data)
+                props.history.push("/")
             })
             .catch(err => {
                 props.toggleLoading(false)
@@ -95,4 +112,4 @@ function Register(props){
     )
 }
 
-export default connect(null, mapDispatchToProps)(Register)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register))
